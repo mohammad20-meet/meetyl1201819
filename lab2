@@ -1,0 +1,46 @@
+import tkinter as tk
+from tkinter import simpledialog
+'''
+a = [5,10,15,20,25]
+def make_list ():
+	x = [a[0], a[-1]]
+	print (x)
+#make_list()
+
+a = [ 1,1,2,3,5,8,13,21,34,55,89]
+lessthan5 = []
+def value_less_5():
+	x = simpledialog.askstring("Input", "Your message here!", parent=tk.Tk())
+	for number in a:
+		if number <=int(x):
+			lessthan5.append(number)
+	print(lessthan5)
+#value_less_5()
+#this is so hard you have no idea
+'''
+import turtle
+a = [1,1,2,3,5,8,13,21,34,55,89]
+b = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+commonlist = []
+def random_list():
+	x = random.randit(1,15)
+	for i in range(x):
+		append.random.randit(1,15)
+	y = random.randit(1,15)
+	for i in range (y):
+		b.append.(random.randit(1,99))
+
+print 
+def common():
+	for i in a:
+		if i in b:
+			if i not in commonlist:
+				commonlist.append(i)
+	return (commonlist)
+
+common()
+random_list()
+
+
+print (commonlist)
+

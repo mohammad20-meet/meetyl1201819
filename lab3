@@ -1,0 +1,103 @@
+#annoying star drawn
+'''
+import turtle
+turtle.pensize(7)
+turtle.pencolor("yellow")
+turtle.pu()
+turtle.goto(-100,50)
+turtle.pd()
+turtle.pencolor("blue")
+turtle.goto(100,50)
+turtle.pencolor("red")
+turtle.goto(-60,-50)
+turtle.pencolor("lightblue")
+turtle.goto(0,130)
+turtle.pencolor("green")
+turtle.goto(60,-50)
+turtle.pencolor("pink")
+turtle.goto(-100,50)
+
+
+
+turtle.mainloop()
+'''
+
+'''
+#exercise 2
+import turtle
+turtle.pensize(3)
+def hi_amit():
+	turtle.begin_fill()
+	for i in range(4):
+		turtle.forward(30)
+		turtle.left(90)
+	for a in range(1):
+		turtle.left(-45)
+		turtle.forward(23)
+		turtle.left(90)
+		turtle.forward(23)
+	turtle.end_fill()
+hi_amit()
+
+
+
+turtle.mainloop()
+'''
+
+'''
+import turtle
+turtle.pensize(7)
+turtle.speed(0)
+def hi_uriel():
+	for i in range(1000):
+		turtle.forward(100)
+		turtle.left(90)
+		turtle.forward(200)
+		turtle.left(-180)
+		turtle.left(33)
+hi_uriel()
+turtle.mainloop()
+'''
+
+'''
+import turtle
+turtle.pensize(7)
+turtle.speed(0)
+def hi_uriel():
+	for i in range(1000):
+		turtle.forward(50)
+		turtle.left(90)
+		turtle.forward(100)
+		turtle.left(-180)
+		turtle.left(22)
+hi_uriel()
+turtle.mainloop()
+'''
+
+'''
+#exrecise 4
+import turtle
+turtle.speed(0)
+def custom():
+	for i in range(3000):
+		turtle.pd()
+		turtle.right(i)
+		turtle.forward(100)
+		turtle.right(i+33)
+		turtle.forward(50)
+		turtle.right(i+50)
+		turtle.forward(20)
+		turtle.right(60)
+		turtle.pu()
+		turtle.home()
+custom()
+
+
+turtle.mainloop()
+
+'''
+
+
+
+
+
