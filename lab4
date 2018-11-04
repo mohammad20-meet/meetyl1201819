@@ -1,3 +1,7 @@
+
+import tkinter as tk
+from tkinter import simpledialog
+
 class Animal(object):
 	def __init__(self,sound,name,age,favorite_color,animal):
 		self.sound = sound
@@ -10,8 +14,29 @@ class Animal(object):
 	def description(self):
 		print(self.name + " is " +self.age +"years old and loves the color "+self.favorite_color)
 	def make_sound(self):
-		print(  self.sound  * 3 )
+		x = simpledialog.askstring("Input", "Meow time", parent=tk.Tk().withdraw())
+		print(  self.sound  * int(x))
 p = Animal("Meow ","Jeff",9,"red","Cat")
 
 #p.eat("peanuts")
 p.make_sound()
+'''
+
+class Person(object):
+	def __init__(self,name,age,city,gender,favorite_color):
+		self.name = name
+		self.age = age
+		self.city = city
+		self.gender = gender
+		self.favorite_color = favorite_color
+	def eat(self,food):
+		print("Ew!! " +self.name + "is eating " + food)
+	def description(self):
+		print(self.name + " is " +self.age +"years old and loves the color "+self.favorite_color)
+	def play(self,sport):
+		print (self.name + "is playing" + sport)
+
+A = Person("Ahmad ", 50 , "Jerusalem", "Transgender" ,"red")
+A.eat("5ara")
+A.play("foott ball")
+'''

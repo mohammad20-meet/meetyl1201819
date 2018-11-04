@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog
-'''
+
 a = [5,10,15,20,25]
 def make_list ():
 	x = [a[0], a[-1]]
@@ -17,7 +17,9 @@ def value_less_5():
 	print(lessthan5)
 #value_less_5()
 #this is so hard you have no idea
-'''
+
+
+
 import turtle
 a = [1,1,2,3,5,8,13,21,34,55,89]
 b = [1,2,3,4,5,6,7,8,9,10,11,12,13]
