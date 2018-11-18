@@ -43,7 +43,7 @@ you = Person("Ethan", "Reed")
 
 me.speak()
 you.speak()
-'''
+
 
 import tkinter as tk
 from tkinter import simpledialog
@@ -52,15 +52,15 @@ from tkinter import simpledialog
 
 exam_one = int(simpledialog.askstring("Input", "Input exam grade one: ", parent=tk.Tk().withdraw()))
 
-exam_two = simpledialog.askstring("Input"," exam grade two: ", parent=tk.Tk().withdraw())
+exam_two = int(simpledialog.askstring("Input"," exam grade two: ", parent=tk.Tk().withdraw()))
 
-exam_three = str(simpledialog.askstring("Input", "exam grade three: "), parent=tk.Tk().withdraw())
+exam_three = int(simpledialog.askstring("Input", "exam grade three: ", parent=tk.Tk().withdraw()))
 
 
 grades = [exam_one, exam_two, exam_three]
 sum = 0
 for grade in grades:
-  sum = sum + grade
+	sum_1 = sum + grade
 
 avg = sum / len(grades)
 
@@ -80,10 +80,16 @@ for grade in grades:
 
     print("Average: " + str(avg))
 
-    print("Grade: " + letter_grade)
+    print("Grade: " + str(letter_grade))
 
-if letter-grade is "F":
+if letter_grade is "F":
    print ("Student is failing.")
 else:
     print ("Student is passing.")
+
+'''
+
+
+
+
 
