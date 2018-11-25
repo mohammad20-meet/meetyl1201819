@@ -21,9 +21,9 @@ square1.random_color()
 
 
 turtle.mainloop()
-'''
+
 #do extras
-''
+'''
 from turtle import Turtle
 import turtle
 turtle.begin_poly()
@@ -45,4 +45,8 @@ class Hexagon(Turtle):
 turtle.mainloop()
 
 hexagon1 = Hexagon(99)
+
+
+
+
 
