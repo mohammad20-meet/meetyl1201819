@@ -43,6 +43,9 @@ class Ball(Turtle):
 		b = random.randint(0,256)
 		self.color(r,g,b)
 
+def check_balls(balls):
+	if ball_1,radius<ball_2,radius:
+		
 
 def check_colliision(ball_1,ball_2):
 	x1 = ball_1.xcor()
@@ -57,10 +60,10 @@ def check_colliision(ball_1,ball_2):
 		return False
 
 
-
 turtle.bgcolor("pink")
 ball_1 = Ball(30,30,50,30,30,"blue")
 ball_2 = Ball(50,14,20,40,30,"red")
+balls = [ball_1,ball_2]
 
 
 
