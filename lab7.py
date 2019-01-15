@@ -16,6 +16,7 @@ turtle.goto(-350,350)
 turtle.goto(-350,-350)
 turtle.goto(350,-350)
 turtle.goto(350,0)
+turtle.hideturtle()
 class Ball(Turtle):
 	def __init__(self,x,y,dx,dy,radius,color):
 		Turtle.__init__(self)
@@ -33,18 +34,19 @@ class Ball(Turtle):
 		newx = oldx + self.dx
 		newy = oldy + self.dy
 		self.goto(newx,newy)
-		if newx>width or newx<-width:
-			self.dx = -self.dx
 		if newy>height or newy<-height:
 			self.dy = -self.dy
+
+		if newx>width or newx<-width:
+			self.dx = -self.dx
+
 	def random_color(self):
 		r = random.randint(0,256)
 		g = random.randint(0,256)
 		b = random.randint(0,256)
 		self.color(r,g,b)
 
-def check_balls(balls):
-	if ball_1,radius<ball_2,radius:
+
 		
 
 def check_colliision(ball_1,ball_2):

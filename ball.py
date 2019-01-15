@@ -1,9 +1,8 @@
 from turtle import *
 import random
 import math
-NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
-MAXIMUM_BALL_RADIUS = 70
+MAXIMUM_BALL_RADIUS = 40
 MINIMUM_BALL_DX = -5
 MAXIMUM_BALL_DX = 5
 MINIMUM_BALL_DY = -5
@@ -31,11 +30,15 @@ class Ball(Turtle):
 		top_side_ball = (newy + self.radius)
 		bottom_side_ball = (newy - self.radius)
 		self.goto(newx,newy)
-		if (top_side_ball >= SCREEN_HEIGHT) or (bottom_side_ball <= -SCREEN_HEIGHT):
+		if top_side_ball > SCREEN_HEIGHT:
 			self.dy = -self.dy
-		elif (right_side_ball >= SCREEN_WIDTH) or (left_side_ball <= -SCREEN_WIDTH):
+		if bottom_side_ball < -SCREEN_HEIGHT:
+			self.dy = -self.dy
+
+		if right_side_ball > SCREEN_WIDTH:
 			self.dx = -self.dx
-		
+		if left_side_ball < -SCREEN_WIDTH:
+			self.dx = -self.dx
 	def speed(self):
 		if 15>self.radius>10:
 			self.dx = 2
@@ -82,8 +85,8 @@ class Ball(Turtle):
 			self.radius = TOO_BIG
 
 	def thxforplaying(self, SCREEN_WIDTH, SCREEN_HEIGHT):
-		x = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS,SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
-		y = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS,SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
+		x = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS , SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
+		y = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS , SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
 		radius = random.randint(MINIMUM_BALL_RADIUS,MAXIMUM_BALL_RADIUS)
 		color = (random.random(),random.random(),random.random())
 		self.goto(x,y)
