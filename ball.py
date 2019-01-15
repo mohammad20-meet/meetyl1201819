@@ -4,18 +4,12 @@ import math
 NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 70
-MINIMUM_BALL_DX = 5
+MINIMUM_BALL_DX = -5
 MAXIMUM_BALL_DX = 5
 MINIMUM_BALL_DY = -5
 MAXIMUM_BALL_DY = 5
+TOO_BIG = 150
 
-NUMBER_OF_DEATH = 5
-MINIUM_DEATH_RADIUS = 10
-MAXIMUM_DEATH_RADIUS = 70
-MINIMUM_DEATH_DX = 5
-MAXIMUM_DEATH_DX = 5
-MINIMUM_DEATH_DY = -5
-MAXIMUM_DEATH_DY = 5
 class Ball(Turtle):
 	def __init__(self,x,y,dx,dy,radius,color):
 		Turtle.__init__(self)
@@ -27,7 +21,7 @@ class Ball(Turtle):
 		self.goto(x,y)
 		self.dx = dx
 		self.dy = dy
-	def move(self,width,height):
+	def move(self,SCREEN_WIDTH,SCREEN_HEIGHT):
 		oldx = self.xcor()
 		oldy = self.ycor()		
 		newx = oldx + self.dx
@@ -37,47 +31,55 @@ class Ball(Turtle):
 		top_side_ball = (newy + self.radius)
 		bottom_side_ball = (newy - self.radius)
 		self.goto(newx,newy)
-		if right_side_ball>width:
-			self.dx = -self.dx
-
-		if left_side_ball<-width:
-			self.dx = -self.dx
-
-		if top_side_ball>height:
+		if (top_side_ball >= SCREEN_HEIGHT) or (bottom_side_ball <= -SCREEN_HEIGHT):
 			self.dy = -self.dy
-
-		if bottom_side_ball<-height:
-			self.dy = -self.dy
+		elif (right_side_ball >= SCREEN_WIDTH) or (left_side_ball <= -SCREEN_WIDTH):
+			self.dx = -self.dx
+		
 	def speed(self):
-		if 15>ball.radius>10:
-
-		elif 20>ball.radius>16:
-
-		elif 25>ball.radius>21:
-
-		elif 30>ball.radius>26:
-
-		elif 35>ball.radius>31:
-
-		elif 40>ball.radius>36:
-
-		elif 45>ball.radius>41:
-
-		elif 50>ball.radius>46:
-
-		elif 55>ball.radius>51:
-
-		elif 60>ball.radius>56:
-
-		elif 65>ball.radius>61:
-
-		elif 70>ball.radius>66:
+		if 15>self.radius>10:
+			self.dx = 2
+			self.dy = 2
+		elif 20>self.radius>16:
+			self.dx = 1.8
+			self.dy = 1.8
+		elif 25>self.radius>21:
+			self.dx = 1.6
+			self.dy = 1.6
+		elif 30>self.radius>26:
+			self.dx = 1.4
+			self.dy = 1.4
+		elif 35>self.radius>31:
+			self.dx = 1.2
+			self.dy = 1.2
+		elif 40>self.radius>36:
+			self.dx = 1
+			self.dy = 1
+		elif 45>self.radius>41:
+			self.dx = 0.8
+			self.dy = 0.8
+		elif 50>self.radius>46:
+			self.dx = 0.6
+			self.dy = 0.6
+		elif 55>self.radius>51:
+			self.dx = 0.4
+			self.dy = 0.4
+		elif 60>self.radius>56:
+			self.dx = 0.2
+			self.dy = 0.2
+		elif 65>self.radius>61:
+			self.dx = 0.1
+			self.dy = 0.1
+		elif 70>self.radius>66:
+			self.dx = 0.09
+			self.dy = 0.09
 			
 	def grow(self, radius):
 		self.radius += radius
 		self.shapesize(self.radius/10)
-		if self.radius > MAXIMUM_BALL_RADIUS:
-			self.shapesize(MAXIMUM_BALL_RADIUS/10)
+		if self.radius > TOO_BIG:
+			self.shapesize(TOO_BIG/10)
+			self.radius = TOO_BIG
 
 	def thxforplaying(self, SCREEN_WIDTH, SCREEN_HEIGHT):
 		x = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS,SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
@@ -88,5 +90,4 @@ class Ball(Turtle):
 		self.color(color)
 		self.shapesize(radius/10)
 		self.radius = radius
-
 
