@@ -1,15 +1,18 @@
 import turtle
 import time
 import random
+import keyboard
 from ball import *
+from dots import *
+from Virus import *
+RUNNING = True
 turtle.tracer(0, 0)
 turtle.hideturtle()
-RUNNING = True
 SLEEP = 0.0077
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
-My_BALL =  Ball(10,-30,-50,30,30,"green")
+My_BALL =  Ball(0,0,-15,-30,20,"green")
 NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 40
@@ -18,8 +21,35 @@ MAXIMUM_BALL_DX = 5
 MINIMUM_BALL_DY = -5
 MAXIMUM_BALL_DY = 5
 
+NUMBER_OF_Dots = 120
+MINIMUM_Dot_RADIUS = 5
+MAXIMUM_Dot_RADIUS = 5
+NUMBER_OF_Viruss = 3 
+MINIMUM_Virus_RADIUS = 60
+MAXIMUM_Virus_RADIUS = 65
 turtle.bgcolor("white")
 BALLS = []
+Dots = []
+Viruss = []
+
+def split_ball(radius):
+	My_BALL.radius = radius
+	My_BALL.shapesize(My_BALL.radius/10)
+
+SPACEBAR = "space"
+def check_space():
+	if keyboard.is_pressed("space"): #check if you pressed the space bar
+		print ("SOMETHING HAPPENED")
+		split_ball(My_BALL.radius/2)
+		My_BALL.clone()
+
+
+
+
+
+
+
+
 
 for i in range(NUMBER_OF_BALLS):
 	x = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS,SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
@@ -30,27 +60,45 @@ for i in range(NUMBER_OF_BALLS):
 	color = (random.random(),random.random(),random.random())
 	new_ball = Ball(x,y,dx,dy,radius,color)
 	BALLS.append(new_ball)
+
+for i in range(NUMBER_OF_Dots):
+	x = random.randint(-SCREEN_WIDTH + MAXIMUM_Dot_RADIUS,SCREEN_WIDTH - MAXIMUM_Dot_RADIUS)
+	y = random.randint(-SCREEN_HEIGHT + MAXIMUM_Dot_RADIUS,SCREEN_HEIGHT - MAXIMUM_Dot_RADIUS)
+	radius = random.randint(MINIMUM_Dot_RADIUS,MAXIMUM_Dot_RADIUS)
+	color = (random.random(),random.random(),random.random())
+	new_Dots = Dot(x,y,radius,color)
+	Dots.append(new_Dots)
+
+for i in range(NUMBER_OF_Viruss):
+	x = random.randint(-SCREEN_WIDTH + MAXIMUM_Virus_RADIUS,SCREEN_WIDTH - MAXIMUM_Virus_RADIUS)
+	y = random.randint(-SCREEN_HEIGHT + MAXIMUM_Virus_RADIUS,SCREEN_HEIGHT - MAXIMUM_Virus_RADIUS)
+	radius = random.randint(MINIMUM_Virus_RADIUS,MAXIMUM_Virus_RADIUS)
+	color = (random.random(),random.random(),random.random())
+	new_Virus = Virus(x,y,radius,color)
+	Viruss.append(new_Virus)
 #Function to control My_BALL
 def movearound(event):
-	event = xcor() - SCREEN_WIDTH
-	event = -ycor() + SCREEN_HEIGHT
+	x = event.x - SCREEN_WIDTH
+	y = SCREEN_HEIGHT - event.y
+	My_BALL.goto(x,y)
+turtle.getcanvas().bind("<Motion>", movearound)
+
 
 def move_all_balls():
 	for i in BALLS:
 		i.move(SCREEN_WIDTH,SCREEN_HEIGHT)
-
-def myballcollide(My_BALL,ball_D):
-	x1 = My_BALL.xcor()
-	x2 = ball_D.xcor()
-	y1 = My_BALL.ycor()
-	y2 = ball_D.ycor()
-	if My_BALL == ball_D:
+def collide1(ball_a,ball_b):
+	x1 = ball_a.xcor()
+	x2 = ball_b.xcor()
+	y1 = ball_a.ycor()
+	y2 = ball_b.ycor()
+	if ball_a == ball_b:
 		return False
 	D = math.sqrt(math.pow((x2-x1),2) + math.pow((y2-y1),2))
-	if D+10<My_BALL.radius+ball_D.radius:
+	if D<ball_a.radius+ball_b.radius:
 		return True
 	else:
-		False
+		return False
 #Bot balls colliding definition
 def collide(ball_a,ball_b):
 	x1 = ball_a.xcor()
@@ -65,15 +113,21 @@ def collide(ball_a,ball_b):
 	else:
 		return False
 #My_BALL eating / teleporting 
-def check_myball_collision(self):
-	for ball_D in BALLS:																																																																														
+
+def check_myball_collision():
+	for ball_D in BALLS:
 		if collide(My_BALL,ball_D):
 			if My_BALL.radius>ball_D.radius:
-				My_BALL.grow(ball_D.radius)
+				My_BALL.grow(ball_D.radius/6)
 				ball_D.thxforplaying(SCREEN_WIDTH,SCREEN_HEIGHT)
-			if  ball_D > My_BALL.radius:
-				ball_D.grow(My_BALL.radius)
-				
+			elif ball_D.radius > My_BALL.radius:
+				ball_D.grow(ball_D.radius/6)
+				quit()
+	for DOT in Dots:
+		if collide1(My_BALL,DOT):
+			My_BALL.grow(DOT.radius/20)
+			DOT.thxforplaying(SCREEN_WIDTH,SCREEN_HEIGHT)
+
 
 #Bot balls colliding code "eating / teleporting "
 def check_all_balls_collision():
@@ -81,16 +135,23 @@ def check_all_balls_collision():
 		for ball_b in BALLS:
 			if collide(ball_a, ball_b):
 				if ball_a.radius> ball_b.radius:
-					ball_a.grow(ball_b.radius/4)
+					ball_a.grow(ball_b.radius/6)
 					ball_b.thxforplaying(SCREEN_WIDTH,SCREEN_HEIGHT)
 				elif ball_b.radius>ball_a.radius:
-					ball_b.grow(ball_a.radius/4)
+					ball_b.grow(ball_a.radius/5)
 					ball_a.thxforplaying(SCREEN_WIDTH,SCREEN_HEIGHT)
+		for DOT in Dots:
+			if collide1(ball_a, DOT):
+				ball_a.grow(DOT.radius/20)
+				DOT.thxforplaying(SCREEN_WIDTH,SCREEN_HEIGHT)
 
-#turtle.getcanvas().bind("<Motion>", movearound)
-#event.listen()
 while RUNNING is True:
+	#for ball in BALLS:
+	#	ball.speed()
 	move_all_balls()
+	check_space()
+
+	check_myball_collision()
 	time.sleep(SLEEP)
 	check_all_balls_collision()
 	turtle.update()

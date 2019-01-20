@@ -20,6 +20,7 @@ class Ball(Turtle):
 		self.goto(x,y)
 		self.dx = dx
 		self.dy = dy
+
 	def move(self,SCREEN_WIDTH,SCREEN_HEIGHT):
 		oldx = self.xcor()
 		oldy = self.ycor()		
@@ -30,6 +31,7 @@ class Ball(Turtle):
 		top_side_ball = (newy + self.radius)
 		bottom_side_ball = (newy - self.radius)
 		self.goto(newx,newy)
+		self.speed()
 		if top_side_ball > SCREEN_HEIGHT:
 			self.dy = -self.dy
 		if bottom_side_ball < -SCREEN_HEIGHT:
@@ -40,42 +42,42 @@ class Ball(Turtle):
 		if left_side_ball < -SCREEN_WIDTH:
 			self.dx = -self.dx
 	def speed(self):
-		if 15>self.radius>10:
-			self.dx = 2
-			self.dy = 2
-		elif 20>self.radius>16:
-			self.dx = 1.8
-			self.dy = 1.8
-		elif 25>self.radius>21:
-			self.dx = 1.6
-			self.dy = 1.6
-		elif 30>self.radius>26:
-			self.dx = 1.4
-			self.dy = 1.4
-		elif 35>self.radius>31:
-			self.dx = 1.2
-			self.dy = 1.2
-		elif 40>self.radius>36:
-			self.dx = 1
-			self.dy = 1
-		elif 45>self.radius>41:
-			self.dx = 0.8
-			self.dy = 0.8
-		elif 50>self.radius>46:
-			self.dx = 0.6
-			self.dy = 0.6
-		elif 55>self.radius>51:
-			self.dx = 0.4
-			self.dy = 0.4
-		elif 60>self.radius>56:
-			self.dx = 0.2
-			self.dy = 0.2
-		elif 65>self.radius>61:
-			self.dx = 0.1
-			self.dy = 0.1
-		elif 70>self.radius>66:
-			self.dx = 0.09
-			self.dy = 0.09
+		if self.radius <=16:
+			self.dx = -9 if self.dx < 0 else 9
+			self.dy = -9 if self.dy <0 else 9
+		elif 20>=self.radius and self.radius>=16:
+			self.dx = -8 if self.dx < 0 else 8
+			self.dy = -8 if self.dy <0 else 8
+		elif 25>=self.radius and self.radius>=21:
+			self.dx = -7 if self.dx < 0 else 7
+			self.dy = -7 if self.dy <0 else 7
+		elif 30>=self.radius and self.radius>=26:
+			self.dx = -6 if self.dx < 0 else 6
+			self.dy = -6 if self.dy <0 else 6
+		elif 35>=self.radius and self.radius>=31:
+			self.dx = -5 if self.dx < 0 else 5
+			self.dy = -5 if self.dy <0 else 5
+		elif 40>=self.radius and self.radius>=36:
+			self.dx = -4 if self.dx < 0 else 4
+			self.dy = -4 if self.dy <0 else 4
+		elif 45>=self.radius and self.radius>=41:
+			self.dx = -3 if self.dx < 0 else 3
+			self.dy = -3 if self.dy <0 else 3
+		elif 50>=self.radius and self.radius>=46:
+			self.dx = -2.5 if self.dx < 0 else 2.5
+			self.dy = -2.5 if self.dy <0 else 2.5
+		elif 55>=self.radius and self.radius>=51:
+			self.dx = -2 if self.dx < 0 else 2
+			self.dy = -2 if self.dy <0 else 2
+		elif 60>=self.radius and self.radius>=56:
+			self.dx = -1.5 if self.dx < 0 else 1.5
+			self.dy = -1.5 if self.dy <0 else 1.5
+		elif 65>=self.radius and self.radius>=61:
+			self.dx = -1 if self.dx < 0 else 1
+			self.dy = -1 if self.dy <0 else 1
+		elif 70>=self.radius and self.radius>=66:
+			self.dx = -0.5 if self.dx < 0 else 0.5
+			self.dy = -0.5 if self.dy <0 else 0.5
 			
 	def grow(self, radius):
 		self.radius += radius
