@@ -12,7 +12,7 @@ SLEEP = 0.0077
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
-My_BALL =  Ball(0,0,-15,-30,20,"green")
+My_BALL =  Ball(0,0,0,0,20,"green")
 NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 40
@@ -28,23 +28,31 @@ NUMBER_OF_Viruss = 3
 MINIMUM_Virus_RADIUS = 60
 MAXIMUM_Virus_RADIUS = 65
 turtle.bgcolor("white")
+My_BALLS = []
 BALLS = []
 Dots = []
 Viruss = []
 
 def split_ball(radius):
-	My_BALL.radius = radius
-	My_BALL.shapesize(My_BALL.radius/10)
 
+	if My_BALL.radius> 30:
+		My_BALL.radius = radius
+		My_BALL.shapesize(My_BALL.radius/10)
+		return True
+	else:
+		return False
 SPACEBAR = "space"
 def check_space():
-	if keyboard.is_pressed("space"): #check if you pressed the space bar
-		print ("SOMETHING HAPPENED")
-		split_ball(My_BALL.radius/2)
-		My_BALL.clone()
+		if keyboard.is_pressed("space"): #check if you pressed the space bar
+			print ("SOMETHING HAPPENED")
+			if split_ball(My_BALL.radius/2) == True:
+			#SSS = Ball(x,y,dx,dy,radius,color)
+				BBB1 = My_BALL.clone()
+			#My_BALLS.append(SSS)
 
-
-
+#shoot the other ball 10 pixels away "cursor direction" then make the clone the exact same as my_ball then
+#make a function called dont touch which calculates the radius between ur ball and the clone and if its
+#colling make ASK AJA
 
 
 
@@ -80,13 +88,16 @@ for i in range(NUMBER_OF_Viruss):
 def movearound(event):
 	x = event.x - SCREEN_WIDTH
 	y = SCREEN_HEIGHT - event.y
-	My_BALL.goto(x,y)
+	My_BALL.dx = (x - My_BALL.xcor()) / 50
+	My_BALL.dy = (y - My_BALL.ycor()) / 50
+	# My_BALL.goto(x,y)
 turtle.getcanvas().bind("<Motion>", movearound)
 
 
 def move_all_balls():
 	for i in BALLS:
 		i.move(SCREEN_WIDTH,SCREEN_HEIGHT)
+		i.speed()
 def collide1(ball_a,ball_b):
 	x1 = ball_a.xcor()
 	x2 = ball_b.xcor()
@@ -148,9 +159,9 @@ def check_all_balls_collision():
 while RUNNING is True:
 	#for ball in BALLS:
 	#	ball.speed()
+	My_BALL.move(SCREEN_WIDTH, SCREEN_HEIGHT)
 	move_all_balls()
 	check_space()
-
 	check_myball_collision()
 	time.sleep(SLEEP)
 	check_all_balls_collision()

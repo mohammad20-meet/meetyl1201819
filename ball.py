@@ -31,7 +31,7 @@ class Ball(Turtle):
 		top_side_ball = (newy + self.radius)
 		bottom_side_ball = (newy - self.radius)
 		self.goto(newx,newy)
-		self.speed()
+		# self.speed()
 		if top_side_ball > SCREEN_HEIGHT:
 			self.dy = -self.dy
 		if bottom_side_ball < -SCREEN_HEIGHT:
